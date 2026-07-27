@@ -1,7 +1,7 @@
 {
   "name": "kanban-live",
   "version": "1.0.0",
-  "description": "",
+  "description": "Real-time collaborative kanban board — NestJS + React/Vite pnpm monorepo",
   "private": true,
   "scripts": {
     "dev": "pnpm -r --parallel dev",
