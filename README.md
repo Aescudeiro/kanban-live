@@ -32,13 +32,33 @@ kanban-live/
 
 - Node `22` (see `.nvmrc`)
 - pnpm `11+`
+- Docker (for the local PostgreSQL database)
 
 ## Getting started
 
 ```bash
-pnpm install      # install every workspace
-pnpm dev          # run all apps in parallel (api + web)
+pnpm install                     # install every workspace
+cp apps/api/.env.example apps/api/.env  # api config (DATABASE_URL)
+pnpm db:up                       # start PostgreSQL in Docker
+pnpm db:migrate                  # apply Drizzle migrations
+pnpm dev                         # run all apps in parallel (api + web)
 ```
+
+## Database
+
+PostgreSQL runs in Docker (`docker-compose.yml`); the API talks to it through
+[Drizzle ORM](https://orm.drizzle.team/) with versioned SQL migrations.
+
+| Script                   | What it does                             |
+| ------------------------ | ---------------------------------------- |
+| `pnpm db:up` / `db:down` | Start / stop the Postgres container      |
+| `pnpm db:migrate`        | Apply pending migrations                 |
+| `api db:generate`        | Generate a migration from schema changes |
+| `api db:studio`          | Open Drizzle Studio                      |
+
+Schema lives in `apps/api/src/db/schema.ts`; generated migrations in
+`apps/api/drizzle/` are committed. `api <script>` means run it from `apps/api`
+(or `pnpm --filter @kanban-live/api <script>`).
 
 ## Scripts (run from the repo root)
 

@@ -6,7 +6,12 @@ import { base } from '../../eslint.config.base.mjs';
 export default tseslint.config(
   ...base,
   {
-    ignores: ['eslint.config.mjs', 'vitest.config.ts', 'vitest.config.e2e.ts'],
+    ignores: [
+      'eslint.config.mjs',
+      'vitest.config.ts',
+      'vitest.config.e2e.ts',
+      'drizzle.config.ts',
+    ],
   },
   ...tseslint.configs.recommendedTypeChecked,
   {
